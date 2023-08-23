@@ -115,7 +115,7 @@ class CRUDBase:
     @staticmethod
     async def get_underinvested_obj(
         session: AsyncSession,
-        obj_in,
+        obj_in
     ) -> Optional[CharityProject]:
         objects = await session.execute(
             select(obj_in).where(
@@ -125,12 +125,13 @@ class CRUDBase:
         object = objects.scalars().all()
         return object
 
+    @staticmethod
     async def get_projects_by_completion_rate(
-        self, session: AsyncSession,
+        session: AsyncSession
     ) -> List[CharityProject]:
         projects = await session.execute(
             select(CharityProject).where(
                 CharityProject.fully_invested
-            )
+            ).order_by(CharityProject.create_date.desc())
         )
         return projects.scalars().all()

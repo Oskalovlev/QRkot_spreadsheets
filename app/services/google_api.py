@@ -1,3 +1,5 @@
+from typing import List
+
 from datetime import datetime
 
 from aiogoogle import Aiogoogle
@@ -5,7 +7,9 @@ from aiogoogle import Aiogoogle
 from app.core.config import settings
 
 
-async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
+async def spreadsheets_create(
+    wrapper_services: Aiogoogle
+) -> str:
     now_date_time = datetime.now().strftime(settings.FORMAT)
     service = await wrapper_services.discover('sheets', 'v4')
     spreadsheet_body = {
@@ -30,8 +34,8 @@ async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
 
 
 async def set_user_permissions(
-        spreadsheetid: str,
-        wrapper_services: Aiogoogle
+    spreadsheetid: str,
+    wrapper_services: Aiogoogle
 ) -> None:
     permissions_body = {
         'type': 'user',
@@ -48,9 +52,9 @@ async def set_user_permissions(
 
 
 async def spreadsheets_update_value(
-        spreadsheetid: str,
-        charity_projects: list,
-        wrapper_services: Aiogoogle
+    spreadsheetid: str,
+    charity_projects: List,
+    wrapper_services: Aiogoogle
 ) -> None:
     now_date_time = datetime.now().strftime(settings.FORMAT)
 
