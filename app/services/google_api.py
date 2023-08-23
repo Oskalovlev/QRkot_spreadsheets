@@ -1,23 +1,15 @@
-# app/services/google_api.py
-
 from datetime import datetime
 
 from aiogoogle import Aiogoogle
 
-# В секретах лежит адрес вашего личного google-аккаунта
 from app.core.config import settings
 
-# Константа с форматом строкового представления времени
 FORMAT = "%Y/%m/%d %H:%M:%S"
 
 
-# Создаём документ
 async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
-    # Получаем текущую дату для заголовка документа
     now_date_time = datetime.now().strftime(FORMAT)
-    # Создаём экземпляр класса Resourse
     service = await wrapper_services.discover('sheets', 'v4')
-    # Формируем тело запроса
     spreadsheet_body = {
         'properties': {
             'title': f'Отчет на {now_date_time}',
@@ -32,7 +24,6 @@ async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
             }}
         ]
     }
-    # Выполняем запрос
     response = await wrapper_services.as_service_account(
         service.spreadsheets.create(json=spreadsheet_body)
     )
@@ -40,7 +31,6 @@ async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
     return spreadsheetid
 
 
-# Предоставляем права доступа
 async def set_user_permissions(
         spreadsheetid: str,
         wrapper_services: Aiogoogle
@@ -57,7 +47,6 @@ async def set_user_permissions(
         ))
 
 
-# Наполняем документ данными
 async def spreadsheets_update_value(
         spreadsheetid: str,
         charity_projects: list,
@@ -66,13 +55,11 @@ async def spreadsheets_update_value(
     now_date_time = datetime.now().strftime(FORMAT)
 
     service = await wrapper_services.discover('sheets', 'v4')
-    # Здесь формируется тело таблицы
     table_values = [
         ['Отчет от', now_date_time],
         ['Топ проектов по скорости закрытия'],
         ['Название проекта', 'Время сбора', 'Описание']
     ]
-    # Здесь в таблицу добавляются строчки
     for project in charity_projects:
         create_date = datetime(project['create_date'])
         close_date = datetime(project['close_date'])
@@ -88,7 +75,7 @@ async def spreadsheets_update_value(
         'majorDimension': 'ROWS',
         'values': table_values
     }
-    response = await wrapper_services.as_service_account(
+    await wrapper_services.as_service_account(
         service.spreadsheets.values.update(
             spreadsheetId=spreadsheetid,
             range='A1:E30',
