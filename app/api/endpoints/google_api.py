@@ -17,7 +17,7 @@ router = APIRouter()
 
 @router.post(
     '/',
-    response_model=list[dict[str, int]],
+    response_model=list[dict],
     dependencies=[Depends(current_superuser)],
 )
 async def get_report(
@@ -26,13 +26,13 @@ async def get_report(
 
 ):
     """Только для суперюзеров."""
-    reservations = await charity_project_crud.get_projects_by_completion_rate(
+
+    charity_projects = await charity_project_crud.get_projects_by_completion_rate(
         session
     )
-
     spreadsheetid = await spreadsheets_create(wrapper_services)
     await set_user_permissions(spreadsheetid, wrapper_services)
     await spreadsheets_update_value(
-        spreadsheetid, reservations, wrapper_services
+        spreadsheetid, charity_projects, wrapper_services
     )
-    return reservations
+    print({'sheet': f'https://docs.google.com/spreadsheets/d/{spreadsheetid}'})
