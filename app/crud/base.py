@@ -124,3 +124,13 @@ class CRUDBase:
         )
         object = objects.scalars().all()
         return object
+
+    async def get_projects_by_completion_rate(
+        self, session: AsyncSession,
+    ) -> List[CharityProject]:
+        projects = await session.execute(
+            select(CharityProject).where(
+                CharityProject.fully_invested
+            )
+        )
+        return projects.scalars().all()
