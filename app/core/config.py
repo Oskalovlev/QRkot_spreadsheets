@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     MIN_LENGTH_PASS: int = 3
     LIFETIME_JWT: int = 3600
 
-    FORMAT: str
+    FORMAT: Optional[str] = None
 
     type: Optional[str] = None
     project_id: Optional[str] = None
