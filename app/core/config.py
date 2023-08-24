@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     LIFETIME_JWT: int = 3600
 
     FORMAT: Optional[str] = None
+    ROW_COUNT: int = 15
+    COLUMN_COUNT: int = 5
+    ROW: int = 10
 
     type: Optional[str] = None
     project_id: Optional[str] = None
