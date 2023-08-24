@@ -87,7 +87,7 @@ async def spreadsheets_update_value(
     await wrapper_services.as_service_account(
         service.spreadsheets.values.update(
             spreadsheetId=spreadsheetid,
-            range='R1C1:R15C5',
+            range=f'R1C1:R{settings.ROW_COUNT}C{settings.COLUMN_COUNT}',
             valueInputOption='USER_ENTERED',
             json=update_body
         )

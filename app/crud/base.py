@@ -1,7 +1,7 @@
 from typing import Optional, List
 
 from fastapi.encoders import jsonable_encoder
-from sqlalchemy import select
+from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models import User, CharityProject, Donation
@@ -131,7 +131,9 @@ class CRUDBase:
     ) -> List[CharityProject]:
         projects = await session.execute(
             select(CharityProject).where(
-                CharityProject.fully_invested
-            ).order_by(CharityProject.create_date.desc())
+                CharityProject.fully_invested).order_by(
+                    func.julianday(CharityProject.close_date),
+                    - func.julianday(CharityProject.create_date)
+            )
         )
         return projects.scalars().all()
