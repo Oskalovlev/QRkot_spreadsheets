@@ -74,10 +74,15 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Заполните .env со следующим содержанием:
+### Создать .env:
+```
+touch .env
+```
+
+### Заполните .env:
 ```sh
 APP_TITLE=QRKot
-DESCRIPTION=Donats или ваше описание
+DESCRIPTION=Donats
 
 DATABASE_URL=sqlite+aiosqlite:///./fastapi.db
 
@@ -95,7 +100,7 @@ MIN_LENGTH_PASS=3
 LIFETIME_JWT=36000
 
 # Для отчета
-FORMAT="%Y/%m/%d %H:%M:%S" или ваш вариант
+FORMAT="%Y/%m/%d %H:%M:%S"
 ROW_COUNT=15
 COLUMN_COUNT=5
 ROW=10
