@@ -50,7 +50,7 @@ pip install -r requirements.txt
 ```
 
 ### Заполните .env со следующим содержанием:
-```
+```sh
 APP_TITLE=QRKot
 DESCRIPTION=Donats или ваше описание
 
