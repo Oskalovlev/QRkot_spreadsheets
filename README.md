@@ -41,7 +41,6 @@
 ```
 git clone https://github.com/Oskalovlev/QRkot_spreadsheets.git
 ```
-
 ```
 cd QRkot_spreadsheets
 ```
@@ -119,6 +118,13 @@ CLIENT_X509_CERT_URL=
 
 EMAIL=
 ```
+
+## Запуск:
+
+```
+uvicorn app.mine:app 
+```
+##### PS Для автоперезапуска добавьте к команде ```--reload```
 
 ### Автор 
 #### Оскалов Лев
