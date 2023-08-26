@@ -39,11 +39,11 @@
 ### Клонировать репозиторий и перейти в него в командной строке:
 
 ```
-git clone https://github.com/Oskalovlev/cat_charity_fund.git
+git clone https://github.com/Oskalovlev/QRkot_spreadsheets.git
 ```
 
 ```
-cd cat_charity_fund
+cd QRkot_spreadsheets
 ```
 
 ### Cоздать и активировать виртуальное окружение:
@@ -112,7 +112,7 @@ TOKEN_URI=
 AUTH_PROVIDER_X509_CERT_URL=
 CLIENT_X509_CERT_URL=
 
-EMAIL=ваша эл.почта
+EMAIL=
 ```
 
 ### Автор 
